@@ -42,3 +42,6 @@ desktop.ini
 .DS_Store
 .vscode/
 *.swp
+
+# --- Local-only planning docs (for Claude, not for GitHub) ---
+docs/SOCForge_Claude_Code_Handoff.md

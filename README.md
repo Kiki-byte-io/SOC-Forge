@@ -21,8 +21,6 @@ Not "install Wazuh and connect agents", but a repeatable detection-engineering l
 
 | Path | Contents |
 |---|---|
-| `docs/SOCForge_Claude_Code_Handoff.md` | Authoritative project brief, constraints and phase gates |
-| `docs/proposal/` | Academic project proposal |
 | `.claude/skills/` | Claude Code workflows (safe lab changes, learn-while-building) |
 | `CLAUDE.md` | Short rules Claude Code loads every session |
 
