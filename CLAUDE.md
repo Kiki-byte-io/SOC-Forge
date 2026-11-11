@@ -4,7 +4,7 @@ Wazuh-based SIEM detection-engineering lab (individual B.Sc. Hons major project)
 Full brief: `docs/SOCForge_Claude_Code_Handoff.md` — read it before substantial work. If it conflicts with the proposal or these rules, stop and ask.
 
 ## Current phase
-**Phase 0 — feasibility and inventory.** Read-only inspection only. No installs, no VM/network/disk changes.
+**Phase 1 — architecture baseline.** Design and documentation only (Phase 0 done: `docs/phase-0/inventory-report.md`). No installs, no VM/network/disk changes.
 
 ## How to work with the owner
 - The owner is learning. Follow: Explain → Plan → Owner approves → Implement → Test → Review → Teach-back → Commit.
