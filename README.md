@@ -4,7 +4,7 @@
 
 An isolated, reproducible blue-team lab that collects Windows and Linux endpoint telemetry in Wazuh, implements a small catalogue of custom detections, and validates each one with controlled positive and negative tests.
 
-> **Status: Phase 0 — feasibility and inventory.** Nothing has been deployed yet. No detection results, pass rates or performance figures exist at this stage.
+> **Status: Phase 1 — architecture baseline.** Nothing has been deployed yet. No detection results, pass rates or performance figures exist at this stage.
 
 ## Core idea
 
@@ -21,6 +21,10 @@ Not "install Wazuh and connect agents", but a repeatable detection-engineering l
 
 | Path | Contents |
 |---|---|
+| `docs/phase-0/inventory-report.md` | Host and lab inventory, feasibility verdict |
+| `docs/architecture/` | Lab blueprint, network plan, telemetry data flow |
+| `docs/detection-catalogue/` | Candidate detection scenarios |
+| `docs/decisions/` | Decision log (what was chosen and why) |
 | `.claude/skills/` | Claude Code workflows (safe lab changes, learn-while-building) |
 | `CLAUDE.md` | Short rules Claude Code loads every session |
 
