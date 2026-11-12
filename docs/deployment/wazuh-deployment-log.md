@@ -7,7 +7,7 @@ Running record of every change made to build the Wazuh VM, so the lab can be reb
 | 1 | 2026-11-12 | Download Ubuntu Server ISO | ✅ Done |
 | 2 | 2026-11-12 | Create SOCForge host-only network | ✅ Done |
 | 3 | 2026-11-12 | Create `socf-wazuh` VM | ✅ Done |
-| 4 | — | Install Ubuntu Server | ⏳ Next |
+| 4 | 2026-11-12 | Install Ubuntu Server | ✅ Done |
 | 5 | — | Install Wazuh all-in-one | — |
 | 6 | — | Health check + dashboard access | — |
 | 7 | — | Snapshot | — |
@@ -72,3 +72,26 @@ VBoxManage storageattach socf-wazuh --storagectl IDE --port 0 --device 0 --type 
 These CLI equivalents were not executed. The `--ostype` identifier should be confirmed with `VBoxManage list ostypes` before reuse.
 
 **Rollback:** VirtualBox → right-click `socf-wazuh` → Remove → Delete all files.
+
+### Issue observed during Step 3/4 — host memory commit limit
+
+The first VM start failed (`VERR_UNRESOLVED_ERROR`). `VBox.log` showed Windows error **1455** (paging file too small) while registering guest RAM. With the Windows hypervisor active, VirtualBox must commit all guest RAM (8 GiB) up front. At the time, the host had ~1.1 GiB of RAM free and ~7.4 GiB of commit headroom. Windows then auto-grew `C:\pagefile.sys` to ~22.8 GB, leaving C: with ~0.1 GB free.
+
+- **Resolution:** reboot (page file shrank back, C: ~12.7 GB free), close heavy desktop apps before starting the VM, and plan to move the page file to D:.
+- **Relevance:** this confirms the RAM constraint predicted in the Phase 0 inventory, and is recorded as a resource limitation for the evaluation.
+
+## Step 4 — Ubuntu Server 24.04.5 install
+
+Manual install (no unattended setup).
+
+| Choice | Value |
+|---|---|
+| Install type | Ubuntu Server (not minimized) |
+| `enp0s3` (host-only) | Static `192.168.60.10/24`, **no gateway**, no DNS |
+| `enp0s8` (NAT) | DHCP (observed `10.0.3.15`) — used for internet during installs |
+| Disk | Entire disk, **LVM disabled**, ext4 `/` ≈ 50 GB (observed `/` = 48.91 GB) |
+| Hostname | `socf-wazuh` |
+| OpenSSH server | Installed |
+| Ubuntu Pro / snaps | Skipped / none |
+
+**Verified from the host (2026-11-12):** ICMP to 192.168.60.10 replies in 1–2 ms; TCP 22 open; installer ISO detached (`emptydrive`).
