@@ -8,7 +8,8 @@ Running record of every change made to build the Wazuh VM, so the lab can be reb
 | 2 | 2026-11-12 | Create SOCForge host-only network | ✅ Done |
 | 3 | 2026-11-12 | Create `socf-wazuh` VM | ✅ Done |
 | 4 | 2026-11-12 | Install Ubuntu Server | ✅ Done |
-| 5 | — | Install Wazuh all-in-one | — |
+| 4b | 2026-11-20 | Snapshot `01-ubuntu-clean-updated` (VM powered off) | ✅ Done |
+| 5 | — | Install Wazuh all-in-one | ⏳ Next |
 | 6 | — | Health check + dashboard access | — |
 | 7 | — | Snapshot | — |
 
@@ -77,7 +78,7 @@ These CLI equivalents were not executed. The `--ostype` identifier should be con
 
 The first VM start failed (`VERR_UNRESOLVED_ERROR`). `VBox.log` showed Windows error **1455** (paging file too small) while registering guest RAM. With the Windows hypervisor active, VirtualBox must commit all guest RAM (8 GiB) up front. At the time, the host had ~1.1 GiB of RAM free and ~7.4 GiB of commit headroom. Windows then auto-grew `C:\pagefile.sys` to ~22.8 GB, leaving C: with ~0.1 GB free.
 
-- **Resolution:** reboot (page file shrank back, C: ~12.7 GB free), close heavy desktop apps before starting the VM, and plan to move the page file to D:.
+- **Resolution (2026-11-20):** a page file on D: was configured but Windows never created it (no boot error logged; cause unknown). Final setting: `C:\pagefile.sys` custom 8192–12288 MB, which raised the commit limit from ~17 GB to ~23 GB (growable to ~27 GB). Close heavy desktop apps before running the lab.
 - **Relevance:** this confirms the RAM constraint predicted in the Phase 0 inventory, and is recorded as a resource limitation for the evaluation.
 
 ## Step 4 — Ubuntu Server 24.04.5 install
